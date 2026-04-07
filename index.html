@@ -643,7 +643,13 @@
                             <p class="section-desc">Ready to break bad? Send a message and let's cook something extraordinary.</p>
                         </div>
 
-                        <form id="contact-form" class="contact-form">
+                        <form id="contact-form" class="contact-form" action="https://formsubmit.co/info@heisenworks.studio" method="POST">
+                            <!-- FormSubmit Configuration -->
+                            <input type="hidden" name="_subject" value="🚀 New Project Inquiry — Heisenberg Empire">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_template" value="box">
+                            <input type="hidden" name="_next" value="https://heisenworks.studio">
+                            <input type="text" name="_honey" style="display:none">
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="name">Your Name</label>
@@ -658,19 +664,19 @@
                             </div>
                             <div class="form-group">
                                 <label for="project-type">Project Type</label>
-                                <select id="project-type" name="project-type" required>
+                                <select id="project-type" name="Project Type" required>
                                     <option value="" disabled selected>Select project type</option>
-                                    <option value="video">Cinematic Editing (Adobe Suite)</option>
-                                    <option value="design">Brand Identity & Design (PS/AI/Figma)</option>
-                                    <option value="web">Web Applications (React/Three.js)</option>
-                                    <option value="motion">3D Motion Design (C4D/Blender)</option>
-                                    <option value="full">Creative Strategy & Full Package</option>
+                                    <option value="Cinematic Editing (Adobe Suite)">Cinematic Editing (Adobe Suite)</option>
+                                    <option value="Brand Identity & Design (PS/AI/Figma)">Brand Identity & Design (PS/AI/Figma)</option>
+                                    <option value="Web Applications (React/Three.js)">Web Applications (React/Three.js)</option>
+                                    <option value="3D Motion Design (C4D/Blender)">3D Motion Design (C4D/Blender)</option>
+                                    <option value="Creative Strategy & Full Package">Creative Strategy & Full Package</option>
                                 </select>
                                 <div class="input-glow"></div>
                             </div>
                             <div class="form-group">
                                 <label for="message">Your Message</label>
-                                <textarea id="message" name="message" rows="5" placeholder="Tell us about your project vision..." required></textarea>
+                                <textarea id="message" name="Message" rows="5" placeholder="Tell us about your project vision..." required></textarea>
                                 <div class="input-glow"></div>
                             </div>
                             <button type="submit" class="btn btn-primary btn-submit">

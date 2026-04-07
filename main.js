@@ -738,21 +738,57 @@ class ContactForm {
         const btn = this.form.querySelector('.btn-submit');
         const originalText = btn.querySelector('span').textContent;
 
-        // Success animation
-        btn.querySelector('span').textContent = 'Transmission Sent! ✓';
-        btn.style.background = 'linear-gradient(135deg, #10B981, #06B6D4)';
+        // Show sending state
+        btn.querySelector('span').textContent = 'Transmitting...';
+        btn.disabled = true;
+        btn.style.opacity = '0.7';
 
-        gsap.from(btn, {
-            scale: 0.95,
-            duration: 0.3,
-            ease: 'back.out(1.7)',
+        // Submit the form data via fetch to FormSubmit
+        const formData = new FormData(this.form);
+
+        fetch(this.form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                // Success animation
+                btn.querySelector('span').textContent = 'Transmission Sent! ✓';
+                btn.style.background = 'linear-gradient(135deg, #10B981, #06B6D4)';
+                btn.style.opacity = '1';
+
+                if (typeof gsap !== 'undefined') {
+                    gsap.from(btn, {
+                        scale: 0.95,
+                        duration: 0.3,
+                        ease: 'back.out(1.7)',
+                    });
+                }
+
+                setTimeout(() => {
+                    this.form.reset();
+                    btn.querySelector('span').textContent = originalText;
+                    btn.style.background = '';
+                    btn.disabled = false;
+                }, 3000);
+            } else {
+                throw new Error('Submission failed');
+            }
+        })
+        .catch(error => {
+            btn.querySelector('span').textContent = 'Error — Try Again';
+            btn.style.background = 'linear-gradient(135deg, #EF4444, #DC2626)';
+            btn.style.opacity = '1';
+            btn.disabled = false;
+
+            setTimeout(() => {
+                btn.querySelector('span').textContent = originalText;
+                btn.style.background = '';
+            }, 3000);
         });
-
-        setTimeout(() => {
-            this.form.reset();
-            btn.querySelector('span').textContent = originalText;
-            btn.style.background = '';
-        }, 3000);
     }
 }
 
